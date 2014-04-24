@@ -1,19 +1,19 @@
 ## This function creates a matrix that chaces its inverse
 
 makeCacheMatrix <- function(x = matrix()) {
- cachedInverse <- NULL
-    set <- function(newMatrix) {
-         x <<- newMatrix
-         cachedInverse <<- NULL
+ cachedInv <- NULL
+    set <- function(matrix2) {
+         x <<- matrix2
+         cachedInv <<- NULL
      }
     get <- function() {
        x
      }
     setinverse <- function(inverse) {
-         cachedInverse <<- inverse
+         cachedInv <<- inverse
      }    
     getinverse <- function() {
-         cachedInverse
+         cachedInv
      }     
      list(set = set,
           get = get,
@@ -26,11 +26,12 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
      inverse <- x$getinverse()
+     ##the following lines check if the inverse is already cached
      if (!is.null(inverse)) {
          return(inverse)
      }
-     m <- x$get()
-     inverse <- solve(m)
+     a <- x$get()
+     inverse <- solve(a)
      x$setinverse(inverse)
      inverse
 }
